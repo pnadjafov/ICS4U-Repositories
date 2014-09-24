@@ -27,7 +27,7 @@ public class AddressBook {
 	public void searchAddressBook(String search){
 		int printCount = 0;
 		for(Contact line: list){
-			if(line.toString().contains(search)){
+			if(line.toString().toLowerCase().contains(search.toLowerCase())){
 				System.out.println(line.toString());
 				printCount++;
 			}
@@ -40,7 +40,7 @@ public class AddressBook {
 	public void searchAndDelete(String search){
 		int printCount = 0;
 		for(int i = 0; i<list.size(); i++){
-			if(list.get(i).toString().contains(search)){
+			if(list.get(i).toString().toLowerCase().contains(search.toLowerCase())){
 				System.out.println(list.get(i).toString() + "At index: " + list.get(i));
 				printCount++;
 			}
