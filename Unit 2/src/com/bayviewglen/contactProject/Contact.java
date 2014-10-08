@@ -33,4 +33,8 @@ public class Contact {
 	public void changePhone(String input){
 		phone = input;
 	}
+	
+	public String displayContact(){
+		return lastName + ", " + firstName + " " + phone;
+	}
 }
