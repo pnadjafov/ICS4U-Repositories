@@ -72,7 +72,7 @@ public class AddressBook{
 
 	public void displayContacts(){
 		for(Contact contact: list){
-			System.out.println(contact.getLastName() + ", " + contact.getFirstName() + " : " + contact.getPhone());
+			System.out.println(contact.displayContact());
 		}
 	}
 

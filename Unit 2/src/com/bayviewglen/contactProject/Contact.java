@@ -35,6 +35,6 @@ public class Contact {
 	}
 	
 	public String displayContact(){
-		return lastName + ", " + firstName + " " + phone;
+		return firstName + " " + lastName + ": " + phone;
 	}
 }

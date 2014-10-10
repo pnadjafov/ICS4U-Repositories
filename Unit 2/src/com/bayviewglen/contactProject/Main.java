@@ -127,7 +127,7 @@ public class Main {
 									}
 								}
 							}else{
-								System.out.println("Please enter a valid option! (Enter 'Exit' or an index value): ");
+								System.out.println("Please enter a valid option! (Enter '-1' to exit or an index value to delete): ");
 							}
 						}catch(Exception ex){
 							System.out.println("Please enter a valid option!");
