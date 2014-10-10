@@ -94,34 +94,10 @@ public class AddressBook{
 			}
 		}
 		if(printCount == 0){
-			System.out.println("No contacts found with that query. Returning to options...");
+			System.out.println("No contacts found with that query.");
 		}
 		return options;
 	}
-
-	/*public void searchAndDelete(String search) throws FileNotFoundException{
-		int printCount = 0;
-		for(Contact contact: list){
-			if(contact.getFirstName().toLowerCase().contains(search.toLowerCase())){
-				System.out.println("(" + list.indexOf(contact) +  "): " + contact.displayContact());
-				printCount++;
-			}else if(contact.getLastName().toLowerCase().contains(search.toLowerCase())){
-				System.out.println("(" + list.indexOf(contact) +  "): " + contact.displayContact());
-				printCount++;
-			}else if(contact.getPhone().contains(search.toLowerCase())){
-				System.out.println("(" + list.indexOf(contact) +  "): " + contact.displayContact());
-				printCount++;
-			}
-		}
-		if(printCount > 0){
-			System.out.println("Which contact would you like to delete? (Pick by index): ");
-			
-		}else{
-			System.out.println("No contacts found.");
-		}
-		saveContacts(); 
-		
-	}*/
 
 	public boolean isValidContact(int input){
 		for(int i = 0; i<list.size(); i++){

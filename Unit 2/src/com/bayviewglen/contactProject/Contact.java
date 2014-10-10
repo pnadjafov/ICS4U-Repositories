@@ -15,7 +15,7 @@ public class Contact {
 		return firstName;
 	}
 	
-	public void changefirstName(String input){
+	public void changeFirstName(String input){
 		firstName = input;
 	}
 	
