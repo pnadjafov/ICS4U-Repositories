@@ -11,6 +11,15 @@ public class HashMain {
 	static HashAddressBook currentBook;
 	static File file = new File("HashAddressBooks/addressBookOne.txt");
 	static File file2 = new File("HashAddressBooks/addressBookTwo.txt");
+	final static int FIRST_CHOICE = 1;
+	final static int SECOND_CHOICE = 2;
+	final static int THIRD_CHOICE = 3;
+	final static int FOURTH_CHOICE = 4;
+	final static int EMPTY = 0;
+	final static int EXIT = -1;
+	final static int TWO_SECONDS = 2000;
+	final static int HALF_SECOND = 500;
+	final static int EXIT_SYSTEM = 0;
 
 	public static void main(String[] args) throws IOException{
 		startMenu();
@@ -27,19 +36,19 @@ public class HashMain {
 		while(!validOption){
 			try{
 				int option = scanner.nextInt();
-				if(option == 1){ // Selects addressBookOne.txt as the current book to traverse
+				if(option == FIRST_CHOICE){ // Selects addressBookOne.txt as the current book to traverse
 					System.out.println("Address Book One selected!");
 					currentBook = bookOne;
 					run(currentBook);
 					validOption = true;
-				}else if(option == 2){ // Selects addressBookTwo.txt as the current book to traverse
+				}else if(option == SECOND_CHOICE){ // Selects addressBookTwo.txt as the current book to traverse
 					System.out.println("Address Book Two selected!");
 					currentBook = bookTwo;
 					run(currentBook);
 					validOption = true;
-				}else if(option == 3){ // Exits the program
+				}else if(option == THIRD_CHOICE){ // Exits the program
 					System.out.println("Thanks for using this program! See you later!");
-					System.exit(0);
+					System.exit(EXIT_SYSTEM);
 				}else{
 					System.out.println("Please enter a valid number (1 to 3): ");
 				}
@@ -61,10 +70,10 @@ public class HashMain {
 				System.out.println("(4) Save and Return to Main Menu");
 				int option = scanner.nextInt();
 				scanner.nextLine();
-				if(option == 1){ // Displays the list of the HashContacts in the HashAddressBook
+				if(option == FIRST_CHOICE){ // Displays the list of the HashContacts in the HashAddressBook
 					currentBook.displayContacts();
-					delay(2000);
-				}else if(option == 2){ // Adds a new HashContact into the HashAddressBook through user input
+					delay(TWO_SECONDS);
+				}else if(option == SECOND_CHOICE){ // Adds a new HashContact into the HashAddressBook through user input
 					System.out.println("Please enter a first name, last name, and phone number: ");
 					boolean validOption = false;
 					while(!validOption){
@@ -77,7 +86,7 @@ public class HashMain {
 							System.out.println("Please enter a valid option!");
 						}
 					}
-				}else if(option == 3){ // Searches the HashAddressBook using a keyword
+				}else if(option == THIRD_CHOICE){ // Searches the HashAddressBook using a keyword
 					ArrayList<HashContact> options = new ArrayList<HashContact>();
 					boolean validKeyword = false;
 					while(!validKeyword){
@@ -86,9 +95,9 @@ public class HashMain {
 							String keyword = scanner.nextLine();
 							if(keyword != ""){
 								options = currentBook.searchAddressBook(keyword, options); // Stores all search results
-								if(options.size() == 0){
+								if(options.size() == EMPTY){
 									validKeyword = false;
-									if(currentBook.getList().size() == 0){ // If the HashAddressBook is empty, move to the next step
+									if(currentBook.getList().size() == EMPTY){ // If the HashAddressBook is empty, move to the next step
 										validKeyword = true;
 									}
 								}else{
@@ -104,13 +113,13 @@ public class HashMain {
 					}
 					System.out.println("Please enter the index of the contact you wish to remove, or simply enter '-1' to return to the options:  ");
 					boolean validOption = false;
-					while(!validOption){ // Removes a HashContact by the inputted index of the user, or exits back to the options
+					while(!validOption){ // Removes a HashContact by the input index of the user, or exits back to the options
 						try{
 							int input = scanner.nextInt();
-							if(input == -1){
+							if(input == EXIT){
 								validOption = true;
-							}else if(input<currentBook.getList().size() && input >= 0){
-								int counter = 0;
+							}else if(input<currentBook.getList().size() && input >= EMPTY){
+								int counter = EMPTY;
 								for(HashContact contact: options){
 									try{
 										counter++;
@@ -136,13 +145,13 @@ public class HashMain {
 							scanner.nextLine();
 						}
 					}
-				}else if(option == 4){ // Saves the HashAddressBook and returns to the start menu
+				}else if(option == FOURTH_CHOICE){ // Saves the HashAddressBook and returns to the start menu
 					System.out.print("Saving");
-					delay(500);
+					delay(HALF_SECOND);
 					System.out.print(".");
-					delay(500);
+					delay(HALF_SECOND);
 					System.out.print(".");
-					delay(500);
+					delay(HALF_SECOND);
 					System.out.print(".");
 					System.out.println("\n");
 					currentBook.saveContacts();
