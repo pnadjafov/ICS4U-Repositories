@@ -1,7 +1,6 @@
 package com.bayviewglen.hashBook;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -28,17 +27,17 @@ public class HashMain {
 		while(!validOption){
 			try{
 				int option = scanner.nextInt();
-				if(option == 1){
+				if(option == 1){ // Selects addressBookOne.txt as the current book to traverse
 					System.out.println("Address Book One selected!");
 					currentBook = bookOne;
 					run(currentBook);
 					validOption = true;
-				}else if(option == 2){
+				}else if(option == 2){ // Selects addressBookTwo.txt as the current book to traverse
 					System.out.println("Address Book Two selected!");
 					currentBook = bookTwo;
 					run(currentBook);
 					validOption = true;
-				}else if(option == 3){
+				}else if(option == 3){ // Exits the program
 					System.out.println("Thanks for using this program! See you later!");
 					System.exit(0);
 				}else{
@@ -62,10 +61,10 @@ public class HashMain {
 				System.out.println("(4) Save and Return to Main Menu");
 				int option = scanner.nextInt();
 				scanner.nextLine();
-				if(option == 1){
+				if(option == 1){ // Displays the list of the HashContacts in the HashAddressBook
 					currentBook.displayContacts();
 					delay(2000);
-				}else if(option == 2){
+				}else if(option == 2){ // Adds a new HashContact into the HashAddressBook through user input
 					System.out.println("Please enter a first name, last name, and phone number: ");
 					boolean validOption = false;
 					while(!validOption){
@@ -78,7 +77,7 @@ public class HashMain {
 							System.out.println("Please enter a valid option!");
 						}
 					}
-				}else if(option == 3){
+				}else if(option == 3){ // Searches the HashAddressBook using a keyword
 					ArrayList<HashContact> options = new ArrayList<HashContact>();
 					boolean validKeyword = false;
 					while(!validKeyword){
@@ -86,9 +85,12 @@ public class HashMain {
 							System.out.println("Please enter a keyword to search, or just press 'enter' to display all contacts: ");
 							String keyword = scanner.nextLine();
 							if(keyword != ""){
-								options = currentBook.searchAddressBook(keyword, options);
+								options = currentBook.searchAddressBook(keyword, options); // Stores all search results
 								if(options.size() == 0){
 									validKeyword = false;
+									if(currentBook.getList().size() == 0){ // If the HashAddressBook is empty, move to the next step
+										validKeyword = true;
+									}
 								}else{
 									validKeyword = true;
 								}
@@ -102,7 +104,7 @@ public class HashMain {
 					}
 					System.out.println("Please enter the index of the contact you wish to remove, or simply enter '-1' to return to the options:  ");
 					boolean validOption = false;
-					while(!validOption){
+					while(!validOption){ // Removes a HashContact by the inputted index of the user, or exits back to the options
 						try{
 							int input = scanner.nextInt();
 							if(input == -1){
@@ -127,14 +129,14 @@ public class HashMain {
 									}
 								}
 							}else{
-								System.out.println("Please enter a valid option! (Enter 'Exit' or an index value): ");
+								System.out.println("Please enter a valid option! (Enter '-1' to exit or an index value to delete): ");
 							}
 						}catch(Exception ex){
 							System.out.println("Please enter a valid option!");
 							scanner.nextLine();
 						}
 					}
-				}else if(option == 4){
+				}else if(option == 4){ // Saves the HashAddressBook and returns to the start menu
 					System.out.print("Saving");
 					delay(500);
 					System.out.print(".");

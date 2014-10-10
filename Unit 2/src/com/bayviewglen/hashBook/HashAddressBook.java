@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import com.sun.javafx.collections.MappingChange.Map;
-
 public class HashAddressBook{
 	private HashMap<Integer, HashContact> list;
 	private String listName;
@@ -17,7 +15,7 @@ public class HashAddressBook{
 	private Scanner scanner;
 	private String path;
 
-	public HashAddressBook(File file) throws IOException{
+	public HashAddressBook(File file) throws IOException{ // Constructs a new HashAddressBook using a file as its input location.
 		list = new HashMap<Integer, HashContact>();
 		File f = file;
 		scanner = new Scanner(f);
@@ -26,11 +24,11 @@ public class HashAddressBook{
 		loadContacts();
 	}
 
-	public String getName(){
+	public String getName(){ // Gets the name of the HashAddressBook
 		return listName;
 	}
 	
-	public ArrayList<HashContact> getList(){
+	public ArrayList<HashContact> getList(){ // Obtains an ArrayList with all the HashContacts from the HashAddressBook
 		ArrayList<HashContact> temp = new ArrayList<HashContact>();
 		for(HashContact contact: list.values()){
 			temp.add(contact);
@@ -38,21 +36,21 @@ public class HashAddressBook{
 		return temp;
 	}
 
-	public void addContact(String firstName, String lastName, String phone) throws FileNotFoundException{
+	public void addContact(String firstName, String lastName, String phone) throws FileNotFoundException{ // Adds a HashContact to the HashAddressBook using String inputs
 		list.put(list.size(), new HashContact(firstName, lastName, phone));
 		saveContacts();
 	}
 	
-	public void addContact(HashContact contact){
+	public void addContact(HashContact contact){ // Adds a HashContact to the HashAddressBook using a HashContact as the input
 		list.put(list.size(), contact);
 	}
 	
-	public void removeContact(int input) throws FileNotFoundException{
+	public void removeContact(int input) throws FileNotFoundException{ // Removes a HashContact from the HashAddressBook, and then saves the file the HashAddressBook is in
 		list.remove(input);
 		saveContacts();
 	}
 
-	public void saveContacts() throws FileNotFoundException{
+	public void saveContacts() throws FileNotFoundException{ // Saves the HashAddressBook
 		writer = new PrintWriter(path);
 		writer.println(list.size());
 		for(HashContact contact: list.values()){
@@ -61,7 +59,7 @@ public class HashAddressBook{
 		writer.close();
 	}
 
-	public void loadContacts(){
+	public void loadContacts(){ // Loads the HashAddressBook
 		int numLoop = scanner.nextInt();
 		if(numLoop > 0){
 			scanner.nextLine();
@@ -77,13 +75,13 @@ public class HashAddressBook{
 		}
 	}
 
-	public void displayContacts(){
+	public void displayContacts(){ // Prints out a list of all the HashContacts in the HashAddressBook
 		for(HashContact contact: list.values()){
-			System.out.println(contact.getLastName() + ", " + contact.getFirstName() + " : " + contact.getPhone());
+			System.out.println(contact.displayContact());
 		}
 	}
 
-	public ArrayList<HashContact> searchAddressBook(String search, ArrayList<HashContact> options) throws FileNotFoundException{
+	public ArrayList<HashContact> searchAddressBook(String search, ArrayList<HashContact> options) throws FileNotFoundException{ // Searches the HashAddressBook using a String keyword as the input, and returns an ArrayList of HashContacts filled with search results
 		int printCount = 0;
 		for(HashContact contact: list.values()){
 			if(contact.getFirstName().toLowerCase().contains(search.toLowerCase())){
@@ -106,7 +104,7 @@ public class HashAddressBook{
 		return options;
 	}
 
-	public boolean isValidContact(int input){
+	public boolean isValidContact(int input){ // Checks if a HashContact is in a valid location of the HashAddressBook in terms of its index
 		for(int i = 0; i<list.size(); i++){
 			if(list.get(i).equals(list.get(input))){
 				return true;
