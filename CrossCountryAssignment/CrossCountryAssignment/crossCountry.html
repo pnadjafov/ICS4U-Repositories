@@ -1,0 +1,220 @@
+<html>
+
+<head>
+    <title>Cross Country Calculator</title>
+    <link type="text/css" rel="stylesheet" href="css\cCDesign.css" />
+    <script type="text/javascript" src="js/cCJava.js"></script>
+</head>
+<center>
+
+    <body>
+        <h1>Cross Country Calculator</h1> (By Phillip Nadjafov)
+        <h2>Runner Data</h2>
+        <table id="table1">
+            <tr id='header1'>
+                <td>
+                    First Name:
+                </td>
+                <td>
+                    Last Name:
+                </td>
+                <td>
+                    Mile One:
+                </td>
+                <td>
+                    Mile Two:
+                </td>
+                <td>
+                    Total Time:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" id="firstName1" name="firstName" min="1" max="26">
+                </td>
+                <td>
+                    <input type="text" id="lastName1" name="lastName" min="1" max="26">
+                </td>
+                <td>
+                    <input type="text" id="firstLap1" name="firstLap" min="1" max="">
+                </td>
+                <td>
+                    <input type="text" id="secondLap1" name="secondLap" min="1" max="16">
+                </td>
+                <td>
+                    <input type="text" id="totalTime1" name="thirdLap" min="1" max="16">
+                </td>
+                <td>
+                    <input type="button" id="update1" value="Update" onclick="javascript:process('update1');" />
+                </td>
+                <td>
+                    <input type="button" id="delete1" value="Delete" onclick="javascript:process('delete1');">
+                </td>
+                <td>
+                    <input type="button" id="restore1" value="Restore" onclick="javascript:process('restore1');">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" id="firstName2" name="firstName2" min="1" max="26">
+                </td>
+                <td>
+                    <input type="text" id="lastName2" name="lastName2" min="1" max="26">
+                </td>
+                <td>
+                    <input type="text" id="firstLap2" name="firstLap2" min="1" max="16">
+                </td>
+                <td>
+                    <input type="text" id="secondLap2" name="secondLap2" min="1" max="16">
+                </td>
+                <td>
+                    <input type="text" id="totalTime2" name="totalTime2" min="1" max="16">
+                </td>
+                <td>
+                    <input type="button" id="update2" value="Update" onclick="javascript:process('update2');" />
+                </td>
+                <td>
+                    <input type="button" id="delete2" value="Delete" onclick="javascript:process('delete2');">
+                </td>
+                <td>
+                    <input type="button" id="restore2" value="Restore" onclick="javascript:process('restore2');">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" id="firstName3" name="firstName3" min="1" max="26">
+                </td>
+                <td>
+                    <input type="text" id="lastName3" name="lastName3" min="1" max="26">
+                </td>
+                <td>
+                    <input type="text" id="firstLap3" name="firstLap3" min="1" max="16">
+                </td>
+                <td>
+                    <input type="text" id="secondLap3" name="secondLap3" min="1" max="16">
+                </td>
+                <td>
+                    <input type="text" id="totalTime3" name="totalTime3" min="1" max="16">
+                </td>
+                <td>
+                    <input type="button" id="update3" value="Update" onclick="javascript:process('update3');" />
+                </td>
+                <td>
+                    <input type="button" id="delete3" value="Delete" onclick="javascript:process('delete3');">
+                </td>
+                <td>
+                    <input type="button" id="restore3" value="Restore" onclick="javascript:process('restore3');">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" id="firstName4" name="firstName4" min="1" max="26">
+                </td>
+                <td>
+                    <input type="text" id="lastName4" name="lastName4" min="1" max="26">
+                </td>
+                <td>
+                    <input type="text" id="firstLap4" name="firstLap4" min="1" max="16">
+                </td>
+                <td>
+                    <input type="text" id="secondLap4" name="secondLap4" min="1" max="16">
+                </td>
+                <td>
+                    <input type="text" id="totalTime4" name="totalTime4" min="1" max="16">
+                </td>
+                <td>
+                    <input type="button" id="update4" value="Update" onclick="javascript:process('update4');" />
+                </td>
+                <td>
+                    <input type="button" id="delete4" value="Delete" onclick="javascript:process('delete4');">
+                </td>
+                <td>
+                    <input type="button" id="restore4" value="Restore" onclick="javascript:process('restore4');">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" id="firstName5" name="firstName5" min="1" max="26">
+                </td>
+                <td>
+                    <input type="text" id="lastName5" name="lastName5" min="1" max="26">
+                </td>
+                <td>
+                    <input type="text" id="firstLap5" name="firstLap5" min="1" max="16">
+                </td>
+                <td>
+                    <input type="text" id="secondLap5" name="secondLap5" min="1" max="16">
+                </td>
+                <td>
+                    <input type="text" id="totalTime5" name="totalTime5" min="1" max="16">
+                </td>
+                <td>
+                    <input type="button" id="update5" value="Update" onclick="javascript:process('update5');" />
+                </td>
+                <td>
+                    <input type="button" id="delete5" value="Delete" onclick="javascript:process('delete5');">
+                </td>
+                <td>
+                    <input type="button" id="restore5" value="Restore" onclick="javascript:process('restore5');">
+                </td>
+            </tr>
+        </table>
+        <h2>Runner Output</h2>
+        <table id="table2">
+            <tr id='header2'>
+                <td>
+                    Runner Name
+                </td>
+                <td>
+                    Split One
+                </td>
+                <td>
+                    Split Two
+                </td>
+                <td>
+                    Split Three
+                </td>
+                <td>
+                    Total Time
+                </td>
+            </tr>
+            <tr>
+                <td id='runnerName1'></td>
+                <td id='splitOne1'></td>
+                <td id='splitTwo1'></td>
+                <td id='splitThree1'></td>
+                <td id='totalTimeRunner1'></td>
+            </tr>
+            <tr>
+                <td id='runnerName2'></td>
+                <td id='splitOne2'></td>
+                <td id='splitTwo2'></td>
+                <td id='splitThree2'></td>
+                <td id='totalTimeRunner2'></td>
+            </tr>
+            <tr>
+                <td id='runnerName3'></td>
+                <td id='splitOne3'></td>
+                <td id='splitTwo3'></td>
+                <td id='splitThree3'></td>
+                <td id='totalTimeRunner3'></td>
+            </tr>
+            <tr>
+                <td id='runnerName4'></td>
+                <td id='splitOne4'></td>
+                <td id='splitTwo4'></td>
+                <td id='splitThree4'></td>
+                <td id='totalTimeRunner4'></td>
+            </tr>
+            <tr>
+                <td id='runnerName5'></td>
+                <td id='splitOne5'></td>
+                <td id='splitTwo5'></td>
+                <td id='splitThree5'></td>
+                <td id='totalTimeRunner5'></td>
+            </tr>
+        </table>
+    </body>
+</center>
+
+</html>

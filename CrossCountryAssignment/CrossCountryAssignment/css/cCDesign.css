@@ -1,0 +1,43 @@
+body{
+    background-color: #ff3333;
+    font-family: 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 100;
+    line-height: 26px;
+
+}
+h1{
+	padding-top: 20px;
+}
+td{
+	text-align: center;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+#table1{
+    width: 81%;
+}
+
+#table2{
+    width: 84%;
+}
+
+#table2 tr{
+    height: 20px;
+}
+
+#table2 td{
+border: solid black 1px;
+}
+
+#header1{
+    font-style: bold;
+}
+
+#header2{
+    font-size: bold;
+}
+
