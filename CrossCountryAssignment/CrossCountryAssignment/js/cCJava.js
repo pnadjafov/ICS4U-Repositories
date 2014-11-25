@@ -69,45 +69,45 @@ function update(information) {
     var secondLapSeconds = parseFloat(document.getElementById(information[3]).value.split(":")[0]) * 60 + parseFloat(document.getElementById(information[3]).value.split(":")[1]);
     var thirdLapSeconds = parseFloat(document.getElementById(information[4]).value.split(":")[0]) * 60 + parseFloat(document.getElementById(information[4]).value.split(":")[1]);
 
-    var splitOneMinuites = parseInt(document.getElementById(information[2]).value.split(":")[0]).toString();
+    var splitOneMinutes = parseInt(document.getElementById(information[2]).value.split(":")[0]).toString();
     var splitOneSeconds = parseFloat(document.getElementById(information[2]).value.split(":")[1]).toString();
-    var splitOne = splitOneMinuites + ":" + splitOneSeconds;
+    var splitOne = splitOneMinutes + ":" + splitOneSeconds;
 
     var sFDiff = parseFloat(secondLapSeconds - firstLapSeconds);
-    splitTwoMinuites = parseInt(sFDiff / 60);
+    splitTwoMinutes = parseInt(sFDiff / 60);
     splitTwoSeconds = sFDiff % 60;
-    var splitTwo = splitTwoMinuites.toString() + ":" + splitTwoSeconds.toFixed(3).toString();
+    var splitTwo = splitTwoMinutes.toString() + ":" + splitTwoSeconds.toFixed(3).toString();
 
     var tSDiff = parseFloat(thirdLapSeconds - secondLapSeconds);
-    splitTwoMinuites = parseInt(tSDiff / 60)
+    splitTwoMinutes = parseInt(tSDiff / 60)
     splitTwoSeconds = tSDiff % 60;
-    var splitThree = splitTwoMinuites.toString() + ":" + splitTwoSeconds.toFixed(3).toString();
+    var splitThree = splitTwoMinutes.toString() + ":" + splitTwoSeconds.toFixed(3).toString();
 
-    var totalMinuites = parseInt(document.getElementById(information[4]).value.split(":")[0]).toString();
+    var totalMinutes = parseInt(document.getElementById(information[4]).value.split(":")[0]).toString();
     var totalSeconds = parseFloat(document.getElementById(information[4]).value.split(":")[1]).toString();
-    var totalTime = totalMinuites + ":" + totalSeconds;
+    var totalTime = totalMinutes + ":" + totalSeconds;
 
     if (fullName == " ") {
         document.getElementById(information[5]).innerHTML = "Error";
     } else {
         document.getElementById(information[5]).innerHTML = fullName;
     }
-    if (splitOneMinuites == "NaN" || splitOneSeconds == "NaN") {
+    if (splitOneMinutes == "NaN" || splitOneSeconds == "NaN") {
         document.getElementById(information[6]).innerHTML = "Error";
     } else {
         document.getElementById(information[6]).innerHTML = splitOne;
     }
-    if (splitTwoMinuites == "NaN" || splitTwoSeconds == "NaN") {
+    if (splitTwoMinutes == "NaN" || splitTwoSeconds == "NaN") {
         document.getElementById(information[7]).innerHTML = "Error";
     } else {
         document.getElementById(information[7]).innerHTML = splitTwo;
     }
-    if (splitOneMinuites == "NaN" || splitOneSeconds == "NaN") {
+    if (splitOneMinutes == "NaN" || splitOneSeconds == "NaN") {
         document.getElementById(information[8]).innerHTML = "Error";
     } else {
         document.getElementById(information[8]).innerHTML = splitThree;
     }
-    if (totalMinuites == "NaN" || totalSeconds == "NaN") {
+    if (totalMinutes == "NaN" || totalSeconds == "NaN") {
         document.getElementById(information[9]).innerHTML = "Error";
     } else {
         document.getElementById(information[9]).innerHTML = totalTime;
