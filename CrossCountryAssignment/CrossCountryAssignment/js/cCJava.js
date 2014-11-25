@@ -4,11 +4,6 @@ var runnerHistroy3 = [];
 var runnerHistory4 = [];
 var runnerHistroy5 = [];
 
-function padding(time){
-    var value = time.toString();
-    String("00:00.000" + n).slice(-5);
-}
-
 function process(button) {
     if (button == "update1") {
         var information = ['firstName1', 'lastName1', 'firstLap1', 'secondLap1', 'totalTime1', 'runnerName1', 'splitOne1', 'splitTwo1', 'splitThree1', 'totalTimeRunner1',
@@ -80,13 +75,13 @@ function update(information) {
 
     var sFDiff = parseFloat(secondLapSeconds - firstLapSeconds);
     splitTwoMinuites = parseInt(sFDiff / 60);
-    splitTwoSeconds = parseInt(sFDiff % 60);
-    var splitTwo = splitTwoMinuites.toString() + ":" + splitTwoSeconds.toString();
+    splitTwoSeconds = sFDiff % 60;
+    var splitTwo = splitTwoMinuites.toString() + ":" + splitTwoSeconds.toFixed(3).toString();
 
     var tSDiff = parseFloat(thirdLapSeconds - secondLapSeconds);
-    splitTwoMinuites = parseInt(tSDiff / 60);
-    splitTwoSeconds = parseInt(tSDiff % 60);
-    var splitThree = splitTwoMinuites.toString() + ":" + splitTwoSeconds.toString();
+    splitTwoMinuites = parseInt(tSDiff / 60)
+    splitTwoSeconds = tSDiff % 60;
+    var splitThree = splitTwoMinuites.toString() + ":" + splitTwoSeconds.toFixed(3).toString();
 
     var totalMinuites = parseInt(document.getElementById(information[4]).value.split(":")[0]).toString();
     var totalSeconds = parseFloat(document.getElementById(information[4]).value.split(":")[1]).toString();

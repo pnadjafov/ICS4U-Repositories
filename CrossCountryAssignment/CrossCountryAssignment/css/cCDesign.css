@@ -1,43 +1,62 @@
-body{
-    background-color: #ff3333;
+body {
+    background-color: #FF3333;
     font-family: 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
     font-size: 24px;
     font-style: normal;
     font-variant: normal;
     font-weight: 100;
     line-height: 26px;
-
 }
-h1{
-	padding-top: 20px;
+h1 {
+    padding-top: 20px;
+    line-height: 1em;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 60px;
+    text-shadow: 0px 0px 0 rgb(233, 233, 233), 1px 1px 0 rgb(220, 220, 220), 2px 2px 0 rgb(208, 208, 208), 3px 3px 0 rgb(195, 195, 195), 4px 4px 0 rgb(183, 183, 183), 5px 5px 0 rgb(170, 170, 170), 6px 6px 0 rgb(158, 158, 158), 7px 7px 0 rgb(146, 146, 146), 8px 8px 7px rgba(0, 0, 0, 0.6), 8px 8px 1px rgba(0, 0, 0, 0.5), 0px 0px 7px rgba(0, 0, 0, .2);
 }
-td{
-	text-align: center;
-	padding-bottom: 5px;
-	padding-left: 5px;
-	padding-right: 5px;
+td {
+    text-align: center;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
-#table1{
+#table1 {
     width: 81%;
 }
-
-#table2{
+#table2 {
     width: 84%;
 }
-
-#table2 tr{
-    height: 20px;
+#table2 tr {
+    height: 30px;
 }
-
-#table2 td{
-border: solid black 1px;
+#table2 td {
+    border: solid black 1px;
 }
-
-#header1{
-    font-style: bold;
+#delete, #update, #restore {
+    background: #ff3333;
+    font-family: 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+    background-image: -webkit-linear-gradient(top, #ff3333, #992020);
+    background-image: -moz-linear-gradient(top, #ff3333, #992020);
+    background-image: -ms-linear-gradient(top, #ff3333, #992020);
+    background-image: -o-linear-gradient(top, #ff3333, #992020);
+    background-image: linear-gradient(to bottom, #ff3333, #992020);
+    -webkit-border-radius: 30;
+    -moz-border-radius: 30;
+    border-radius: 30px;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 2px 4px 2px 4px;
+    border: solid #000000 2px;
+    text-decoration: none;
 }
-
-#header2{
-    font-size: bold;
+#delete:hover, #update:hover, #restore:hover {
+    background: #ff3333;
+    font-family: 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+    background-image: -webkit-linear-gradient(top, #ff3333, #ff0000);
+    background-image: -moz-linear-gradient(top, #ff3333, #ff0000);
+    background-image: -ms-linear-gradient(top, #ff3333, #ff0000);
+    background-image: -o-linear-gradient(top, #ff3333, #ff0000);
+    background-image: linear-gradient(to bottom, #ff3333, #ff0000);
+    text-decoration: none;
 }
-
