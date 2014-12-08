@@ -7,7 +7,7 @@ public class BadNeighbors {
 				  52, 72, 37, 51, 1, 81, 45, 435, 7, 36, 57, 86, 81, 72 };
 		System.out.println("Maximum possible funds to save the well: $" + doorToDoor(neighbors1) + ".");
 		
-		int[] neighbors2 = { 7, 7, 7, 7, 7, 7, 7 };
+		int[] neighbors2 = { 7, 7, 7, 7, 7, 7, 7};
 		System.out.println("Maximum possible funds to save the well: $" + doorToDoor(neighbors2) + ".");
 	}
 
@@ -16,6 +16,10 @@ public class BadNeighbors {
 			return 0;
 		}else if(neighbors.length == 1){
 			return neighbors[0];
+		}else if(neighbors.length == 2){
+			return Math.max(neighbors[0], neighbors[1]);
+		}else if(neighbors.length == 3){
+			return Math.max(Math.max(neighbors[0], neighbors[1]), neighbors[2]);
 		}else{
 			int[] funds = new int[neighbors.length];
 			boolean firstIndex = false;
