@@ -23,9 +23,10 @@ $(document).ready(function() {
     $('#playerCards').hide();
     $('#playerScore').hide();
     $('#slider').hide();
+    $('#playerWallet').hide();
+    $('#doubleDown').hide();
     $('#play').fadeIn(3000);
     $('#ULB').fadeIn(3000);
-    $('#playerWallet').hide();
 
     $('#play').click(function() { // Initializes the slider, creates a deck and distributes 2 cards to each player
         $('#playerWallet').hide();
@@ -55,7 +56,7 @@ $(document).ready(function() {
             $('#betAmount').html("Please enter a valid bet!");
             playerBet = 0;
         } else {
-        	$('#bet').fadeOut();
+            $('#bet').fadeOut();
             $('#betAmount').fadeOut();
             $('#slider').fadeOut();
             $('#ULB').fadeOut();
@@ -68,6 +69,7 @@ $(document).ready(function() {
             $('#playerCards').delay(800).fadeIn();
             $('#playerScore').delay(800).fadeIn();
             $('#playerWallet').delay(800).fadeIn();
+            $('#doubleDown').delay(800).fadeIn();
             $("#playerWallet").html("Player Wallet: $" + playerWallet + " | Current Bet: $" + playerBet);
         }
     });
@@ -85,6 +87,7 @@ $(document).ready(function() {
             $('#play').delay(800).fadeIn();
             $('#hit').fadeOut();
             $('#stay').fadeOut();
+            $('#doubleDown').fadeOut();
         } else if (getScore(playerCards) == 21) { // Player gets blackjack, add bet to wallet and allow for a re-try.
             $('#playerScore').html('You win! Would you like to play again?');
             playerWallet += playerBet;
@@ -92,24 +95,45 @@ $(document).ready(function() {
             $('#play').delay(800).fadeIn();
             $('#hit').fadeOut();
             $('#stay').fadeOut();
+            $('#doubleDown').fadeOut();
         } else { // If none of the above scenarios occur, simply display the player's card score.
             $('#playerScore').html('Player Score: ' + getScore(playerCards));
         }
     });
-
+    $('#doubleDown').click(function() { // Doubles the player's bet, calls a "hit" and then forces a "stay" on the next turn.
+        if (playerBet * 2 > playerWallet) { // If the player does not have enough funds in their wallet, the player is informed
+            $('#playerScore').html('Not enough funds! | Player Score: ' + getScore(playerCards));
+        } else {
+            playerBet = playerBet * 2;
+            hit(playerName);
+            var cards = '';
+            $.each(playerCards, function(index, value) {
+                cards += "<img src = \'" + value.url + "\''>";
+            })
+            $('#playerCards').html(cards);
+            if (getScore(playerCards) > 21) { // Player busts. Take away bet and allow for a re-try.
+                $('#playerScore').html('Busted! Would you like to try again?');
+                playerWallet -= playerBet;
+                $("#playerWallet").html("Player Wallet: $" + playerWallet);
+                $('#play').delay(800).fadeIn();
+                $('#hit').fadeOut();
+                $('#stay').fadeOut();
+                $('#doubleDown').fadeOut();
+            } else if (getScore(playerCards) == 21) { // Player gets blackjack, add bet to wallet and allow for a re-try.
+                $('#playerScore').html('You win! Would you like to play again?');
+                playerWallet += playerBet;
+                $("#playerWallet").html("Player Wallet: $" + playerWallet);
+                $('#play').delay(800).fadeIn();
+                $('#hit').fadeOut();
+                $('#stay').fadeOut();
+                $('#doubleDown').fadeOut();
+            } else { // If none of the above scenarios occur, simply display the player's card score.
+                $('#playerScore').html('Player Score: ' + getScore(playerCards));
+                $('#stay').trigger('click'); // Forces a click on the "stay" button.
+            }
+        }
+    });
     $('#stay').click(function() { //Player decides to stay and the automated dealer begins their turn
-        /*if (getScore(playerCards) == getScore(dealerCards)) { // If dea
-               $('#dealerScore').html('Dealer Score: ' + getScore(dealerCards) + "<br>" + ' Draw! Your bet has been returned. Would you like to try again?');
-               cards = '';
-               $.each(dealerCards, function(index, value) {
-                   cards += "<img src = \'" + value.url + "\''>";
-               })
-               $('#dealerCards').html(cards);
-               $("#playerWallet").html("Player Wallet: $" + playerWallet);
-               $('#play').fadeIn();
-               $('#hit').fadeOut();
-               $('#stay').fadeOut();
-               */
         if (getScore(playerCards) < getScore(dealerCards)) { // Dealer automatically has a higher score, player loses and bet is taken.
             $('#dealerScore').html('Dealer Score: ' + getScore(dealerCards) + "<br>" + ' Dealer wins! Would you like to try again?');
             cards = '';
@@ -119,9 +143,10 @@ $(document).ready(function() {
             $('#dealerCards').html(cards);
             playerWallet -= playerBet;
             $("#playerWallet").html("Player Wallet: $" + playerWallet);
-            $('#play').fadeIn();
+            $('#play').delay(800).fadeIn();
             $('#hit').fadeOut();
             $('#stay').fadeOut();
+            $('#doubleDown').fadeOut();
         } else {
             var stopDealer = false;
             while (!stopDealer) {
@@ -164,6 +189,7 @@ $(document).ready(function() {
         $('#play').delay(800).fadeIn();
         $('#hit').fadeOut();
         $('#stay').fadeOut();
+        $('#doubleDown').fadeOut();
     });
 });
 
@@ -184,6 +210,7 @@ function playGame() { // Initializes the deck, distributes the cards to both pla
     $('#playerCards').fadeOut();
     $('#playerScore').fadeOut();
     $('#play').fadeOut();
+    $('#doubleDown').fadeOut();
     $('#bet').delay(800).fadeIn();
     $('#betAmount').delay(800).fadeIn();
     $('#slider').delay(800).fadeIn();
@@ -216,6 +243,7 @@ function playGame() { // Initializes the deck, distributes the cards to both pla
         $('#play').fadeIn();
         $('#hit').fadeOut();
         $('#stay').fadeOut();
+        $('#doubleDown').fadeOut();
     } else { // Display the player's cards
         $('#playerScore').html('Player Score: ' + getScore(playerCards));
     }
@@ -301,13 +329,13 @@ function getScore(cards) { // Returns the score of the player or dealer
 }
 
 function checkAces(getDeck, score) { // Automatically ensures best possible score for the player/dealer if they have aces
-    for (var i = 0; i < getDeck.length; i++) {
-        if (getDeck[i].cardType == "ace") {
-            if (score + 10 <= 21) {
-                score += 10;
+        for (var i = 0; i < getDeck.length; i++) {
+            if (getDeck[i].cardType == "ace") {
+                if (score + 10 <= 21) {
+                    score += 10;
+                }
             }
         }
+        return score;
     }
-    return score;
-}
-// Made by Phillip Nadjafov
+    // Made by Phillip Nadjafov

@@ -38,7 +38,7 @@ h2 {
     text-align: center;
     width: 100%;
 }
-#play, #bet, #hit, #stay {
+#play, #bet, #hit, #stay, #doubleDown {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     -ms-border-radius: 3px;
