@@ -29,7 +29,6 @@ $(document).ready(function() {
     $('#ULB').fadeIn(3000);
 
     $('#play').click(function() { // Initializes the slider, creates a deck and distributes 2 cards to each player
-        $('#play').fadeOut();
         $('#playerWallet').hide();
         $(function() {
             $("#slider").slider({
@@ -57,7 +56,6 @@ $(document).ready(function() {
             $('#betAmount').html("Please enter a valid bet!");
             playerBet = 0;
         } else {
-            playerWallet -= playerBet;
             $('#bet').fadeOut();
             $('#betAmount').fadeOut();
             $('#slider').fadeOut();
@@ -84,13 +82,20 @@ $(document).ready(function() {
         $('#playerCards').html(cards);
         if (getScore(playerCards) > 21) { // Player busts. Take away bet and allow for a re-try.
             $('#playerScore').html('Busted! Would you like to try again?');
+            playerWallet -= playerBet;
             $("#playerWallet").html("Player Wallet: $" + playerWallet);
-            endGame();
+            $('#play').delay(800).fadeIn();
+            $('#hit').fadeOut();
+            $('#stay').fadeOut();
+            $('#doubleDown').fadeOut();
         } else if (getScore(playerCards) == 21) { // Player gets blackjack, add bet to wallet and allow for a re-try.
             $('#playerScore').html('You win! Would you like to play again?');
-            playerWallet += playerBet * 2;
+            playerWallet += playerBet;
             $("#playerWallet").html("Player Wallet: $" + playerWallet);
-            endGame();
+            $('#play').delay(800).fadeIn();
+            $('#hit').fadeOut();
+            $('#stay').fadeOut();
+            $('#doubleDown').fadeOut();
         } else { // If none of the above scenarios occur, simply display the player's card score.
             $('#playerScore').html('Player Score: ' + getScore(playerCards));
         }
@@ -108,13 +113,20 @@ $(document).ready(function() {
             $('#playerCards').html(cards);
             if (getScore(playerCards) > 21) { // Player busts. Take away bet and allow for a re-try.
                 $('#playerScore').html('Busted! Would you like to try again?');
+                playerWallet -= playerBet;
                 $("#playerWallet").html("Player Wallet: $" + playerWallet);
-                endGame();
+                $('#play').delay(800).fadeIn();
+                $('#hit').fadeOut();
+                $('#stay').fadeOut();
+                $('#doubleDown').fadeOut();
             } else if (getScore(playerCards) == 21) { // Player gets blackjack, add bet to wallet and allow for a re-try.
                 $('#playerScore').html('You win! Would you like to play again?');
-                playerWallet += playerBet * 2;
+                playerWallet += playerBet;
                 $("#playerWallet").html("Player Wallet: $" + playerWallet);
-                endGame();
+                $('#play').delay(800).fadeIn();
+                $('#hit').fadeOut();
+                $('#stay').fadeOut();
+                $('#doubleDown').fadeOut();
             } else { // If none of the above scenarios occur, simply display the player's card score.
                 $('#playerScore').html('Player Score: ' + getScore(playerCards));
                 $('#stay').trigger('click'); // Forces a click on the "stay" button.
@@ -129,8 +141,12 @@ $(document).ready(function() {
                 cards += "<img src = \'" + value.url + "\''>";
             })
             $('#dealerCards').html(cards);
+            playerWallet -= playerBet;
             $("#playerWallet").html("Player Wallet: $" + playerWallet);
-            endGame();
+            $('#play').delay(800).fadeIn();
+            $('#hit').fadeOut();
+            $('#stay').fadeOut();
+            $('#doubleDown').fadeOut();
         } else {
             var stopDealer = false;
             while (!stopDealer) {
@@ -138,38 +154,42 @@ $(document).ready(function() {
                     hit(dealerName);
                 }
                 cards = '';
-                $.each(dealerCards, function(index, value) { // Displays all cards
+                $.each(dealerCards, function(index, value) { // Display all cards
                     cards += "<img src = \'" + value.url + "\''>";
                 })
                 $('#dealerCards').html(cards);
                 if (getScore(dealerCards) > 21) { // Dealer busts, player wins bet.
                     $('#dealerScore').html('Dealer Score: ' + getScore(dealerCards) + "<br>" + 'Dealer busts! You win! Would you like to play again?');
-                    playerWallet += playerBet * 2;
+                    playerWallet += playerBet;
                     $("#playerWallet").html("Player Wallet: $" + playerWallet);
                     stopDealer = true;
                 } else if (getScore(dealerCards) >= 17) { // Dealer is above or at their legal limit
                     if (getScore(dealerCards) > getScore(playerCards)) { // Dealer wins, player loses bet
                         $('#dealerScore').html('Dealer Score: ' + getScore(dealerCards) + "<br>" + 'Dealer wins! Would you like to try again?');
+                        playerWallet -= playerBet;
                         $("#playerWallet").html("Player Wallet: $" + playerWallet);
                     } else if (getScore(dealerCards) == getScore(playerCards)) { // Draw, bet is returned
                         $('#dealerScore').html('Dealer Score: ' + getScore(dealerCards) + "<br>" + 'Draw! Your bet has been returned. Would you like to try again?');
-                        playerWallet += playerBet;
                         $("#playerWallet").html("Player Wallet: $" + playerWallet);
                     } else if (getScore(dealerCards) < getScore(playerCards)) { // Dealer loses, player wins bet
                         $('#dealerScore').html('Dealer Score: ' + getScore(dealerCards) + "<br>" + 'Dealer loses! You win! Would you like to play again?');
-                        playerWallet += playerBet * 2;
+                        playerWallet += playerBet;
                         $("#playerWallet").html("Player Wallet: $" + playerWallet);
                     }
                     stopDealer = true;
                 } else if (getScore(dealerCards) > getScore(playerCards)) { // Dealer instantly wins, player loses bet
                     $('#dealerScore').html('Dealer Score: ' + getScore(dealerCards) + "<br>" + 'The dealer wins! Would you like to try again?');
+                    playerWallet -= playerBet;
                     $("#playerWallet").html("Player Wallet: $" + playerWallet);
                     stopDealer = true;
                 }
             }
 
         }
-        endGame();
+        $('#play').delay(800).fadeIn();
+        $('#hit').fadeOut();
+        $('#stay').fadeOut();
+        $('#doubleDown').fadeOut();
     });
 });
 
@@ -218,19 +238,15 @@ function playGame() { // Initializes the deck, distributes the cards to both pla
     $('#playerCards').html(cards);
     if (getScore(playerCards) == 21) { // Player instantly gets blackjack and wins their bet
         $('#playerScore').html('Blackjack! Would you like to play again?');
-        playerWallet += playerBet * 2;
+        playerWallet += playerBet;
         $("#playerWallet").html("Player Wallet: $" + playerWallet);
-        endGame();
+        $('#play').fadeIn();
+        $('#hit').fadeOut();
+        $('#stay').fadeOut();
+        $('#doubleDown').fadeOut();
     } else { // Display the player's cards
         $('#playerScore').html('Player Score: ' + getScore(playerCards));
     }
-}
-
-function endGame() { // Fades out all buttons and allows the player to restart the game
-    $('#play').delay(800).fadeIn();
-    $('#hit').fadeOut();
-    $('#stay').fadeOut();
-    $('#doubleDown').fadeOut();
 }
 
 function createDeck() { // Creates a deck of 52 random cards
