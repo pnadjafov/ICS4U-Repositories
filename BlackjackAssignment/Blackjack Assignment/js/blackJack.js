@@ -7,6 +7,7 @@ var playerWallet = INITIAL_WALLET;
 var playerName = "Player";
 var dealerName = "Dealer";
 var playerBet = EMPTY;
+var countTurns = EMPTY;
 
 $(document).ready(function() {
     $('#play').hide();
@@ -25,11 +26,13 @@ $(document).ready(function() {
     $('#slider').hide();
     $('#playerWallet').hide();
     $('#doubleDown').hide();
+    $('#loan').hide();
     $('#play').fadeIn(3000);
     $('#ULB').fadeIn(3000);
 
     $('#play').click(function() { // Initializes the slider, creates a deck and distributes 2 cards to each player
-        $('#play').fadeOut();
+    	$('#play').fadeOut();
+    	countTurns = EMPTY;
         $('#playerWallet').hide();
         $(function() {
             $("#slider").slider({
@@ -76,6 +79,8 @@ $(document).ready(function() {
         }
     });
     $('#hit').click(function() { // Player hits, calling the "hit" method and displaying a new card
+        countTurns++;
+        $('#doubleDown').fadeOut();
         hit(playerName);
         var cards = '';
         $.each(playerCards, function(index, value) {
@@ -96,7 +101,7 @@ $(document).ready(function() {
         }
     });
     $('#doubleDown').click(function() { // Doubles the player's bet, calls a "hit" and then forces a "stay" on the next turn.
-        if (playerBet * 2 > playerWallet) { // If the player does not have enough funds in their wallet, the player is informed
+        if (playerBet * 2 > playerWallet + playerBet) { // If the player does not have enough funds in their wallet, the player is informed
             $('#playerScore').html('Not enough funds! | Player Score: ' + getScore(playerCards));
         } else {
             playerBet = playerBet * 2;
@@ -171,6 +176,11 @@ $(document).ready(function() {
         }
         endGame();
     });
+	$('#loan').click(function(){ // Allows the player to reset their wallet.
+		$('#loan').fadeOut();
+		playerWallet += INITIAL_WALLET;
+		$("#playerWallet").html("Loan Added! Player Wallet: $" + playerWallet);
+	});
 });
 
 function Card(suit, type) { // Creates a Card object
@@ -227,6 +237,9 @@ function playGame() { // Initializes the deck, distributes the cards to both pla
 }
 
 function endGame() { // Fades out all buttons and allows the player to restart the game
+	if(playerWallet == 0){
+		$('#loan').delay(800).fadeIn();
+	}
     $('#play').delay(800).fadeIn();
     $('#hit').fadeOut();
     $('#stay').fadeOut();
