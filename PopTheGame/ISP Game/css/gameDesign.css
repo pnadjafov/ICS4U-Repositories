@@ -1,0 +1,10 @@
+@font-face {
+    font-family: Pop;
+    src: url(../fonts/Jelly.otf);
+}
+body {
+    font-family: Pop;
+    color: white;
+    font-weight: 20px;
+    text-align: center;
+}
