@@ -2,9 +2,61 @@
     font-family: Pop;
     src: url(../fonts/Jelly.otf);
 }
+
 body {
     font-family: Pop;
     color: white;
     font-weight: 20px;
     text-align: center;
+}
+
+#main {
+    display: all;
+    height: 50%;
+    overflow: auto;
+    margin: auto;
+    position: absolute;
+    top: 200;
+    left: 0;
+    bottom: 0;
+    right: 30;
+    width: 50%;
+
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+#menu.main {
+    background-image: url("../images/background.jpg");
+}
+
+#main h1 {
+    color: white;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.button {
+    display: block;
+    width: 150px;
+    margin: 0 auto;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #FA6B05;
+    color: white;
+    font-weight: bold;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    background-color: #FA6B05;
+    background-image: -webkit-linear-gradient(bottom, #FA6B05 0%, #FA6B10 100%);
+    background-image: linear-gradient(to bottom, #FA6B05 0%, #FA6B10 100%);
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: #FA6B05;
+    background-image: -webkit-linear-gradient(bottom, #B30D5D 0%, #FB1886 100%);
+    background-image: linear-gradient(to bottom, #B30D5D 0%, #FB1886 100%);
 }
