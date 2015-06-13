@@ -1,9 +1,9 @@
 var canvas = document.getElementById('game');
-var clicks = 0;
+var CLEAR = 0;
 var ctx = canvas.getContext("2d");
 var ctx2 = canvas.getContext("2d");
 
-$(document).ready(function() {
+$(document).ready(function() { // When the app is ready, hide the Back button (used for credits) and place the game title
     $('#backBut').hide();
     ctx.fillStyle = '#FA6B05'
     ctx.font = "100px Jelly";
@@ -11,21 +11,19 @@ $(document).ready(function() {
 
 });
 
-
-
-$('.play').click(function() {
+$('.play').click(function() { // When the game is launched, hide the menu, clear the canvas and start the first level
     $('#menu').hide();
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(CLEAR, CLEAR, canvas.width, canvas.height);
     startLevelOne();
 });
 
-$('.credits').click(function() {
+$('.credits').click(function() { // When the credits are viewed, show the back button, clear the canvas, display the author names and hide the main menu buttons
     $('#backBut').show();
     $('#playBut').hide();
     $('#creditsBut').hide();
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(CLEAR, CLEAR, canvas.width, canvas.height);
 
     ctx.fillStyle = '#FA6B05'
     ctx.font = "23px Jelly";
@@ -36,8 +34,8 @@ $('.credits').click(function() {
     ctx2.fillText("& Phillip Nadjafov", 60, 250);
 });
 
-$('.back').click(function() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+$('.back').click(function() { // Clear the canvas and go back to the main menu
+    ctx.clearRect(CLEAR, CLEAR, canvas.width, canvas.height);
 
     $('#playBut').show();
     $('#creditsBut').show();
@@ -48,25 +46,25 @@ $('.back').click(function() {
 
 });
 
-function startLevelOne() {
+function startLevelOne() { // "Tutorial Level", simple circle with a slow growth
 
     var radius2 = 0;
     var canvas = document.getElementById('game');
     var clicks = 0;
     var win = false;
 
-    $("#game").click(function(e) {
+    $("#game").click(function(e) { // Level starts with one click, ends with two and moves on/restarts with three
         clicks++;
         if (clicks == 1) {
             grow();
         }
-        if (clicks == 3) {
+        if (clicks == 3) { // If the player wins, clear the canvas and move to the next level. If not, clear the canvas and restart.
             if (win == true) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.clearRect(CLEAR, CLEAR, canvas.width, canvas.height);
 
                 startLevelTwo();
             } else {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.clearRect(CLEAR, CLEAR, canvas.width, canvas.height);
                 startLevelOne();
 
             }
@@ -75,7 +73,7 @@ function startLevelOne() {
     });
 
 
-    $(document).ready(function() {
+    $(document).ready(function() { // Creates a circle outline, a smaller orange circle and displays the level name.
         var canvas = document.getElementById('game');
         var ctx = canvas.getContext("2d");
         var centerX = canvas.width / 2;
@@ -83,7 +81,7 @@ function startLevelOne() {
         var radius = 125;
 
         ctx.beginPath();
-        ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+        ctx.arc(centerX, centerY, radius, CLEAR, 2 * Math.PI, false);
         ctx.fillStyle = 'white';
         ctx.fill();
         ctx.lineWidth = 15;
@@ -95,7 +93,7 @@ function startLevelOne() {
         var centerY2 = canvas.height / 2;
         var ctx2 = canvas.getContext("2d");
         ctx2.beginPath();
-        ctx2.arc(centerX2, centerY2, radius2, 0, 2 * Math.PI, false);
+        ctx2.arc(centerX2, centerY2, radius2, CLEAR, 2 * Math.PI, false);
         ctx2.fillStyle = "#FA6B05";
         ctx2.fill();
         ctx2.lineWidth = 0;
@@ -109,7 +107,7 @@ function startLevelOne() {
     })
 
 
-    function grow() {
+    function grow() { // Grows the circle and stops it if the player clicks the screen again, then checks if they won or lost depending if the orange circle fits inside the border. Also stops if the circle grows past the border.
         if (clicks == 2) {
             if (radius2 >= 120 && radius2 <= 135) {
                 var winMessage = canvas.getContext("2d");
@@ -134,7 +132,7 @@ function startLevelOne() {
             var centerY2 = canvas.height / 2;
             var ctx2 = canvas.getContext("2d");
             ctx2.beginPath();
-            ctx2.arc(centerX2, centerY2, radius2, 0, 2 * Math.PI, false);
+            ctx2.arc(centerX2, centerY2, radius2, CLEAR, 2 * Math.PI, false);
             ctx2.fillStyle = '#FA6B05';
             ctx2.fill();
             ctx2.lineWidth = 0;
@@ -154,7 +152,7 @@ function startLevelOne() {
 
 }
 
-function startLevelTwo() {
+function startLevelTwo() { // Thinner circle with a faster growth
     var radius2 = 0;
     var canvas = document.getElementById('game');
     var clicks = 0;
@@ -167,11 +165,11 @@ function startLevelTwo() {
         }
         if (clicks == 3) {
             if (win == true) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.clearRect(CLEAR, CLEAR, canvas.width, canvas.height);
                 ctx.beginPath();
                 startLevelThree();
             } else {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.clearRect(CLEAR, CLEAR, canvas.width, canvas.height);
 
                 startLevelTwo();
 
@@ -189,7 +187,7 @@ function startLevelTwo() {
         var radius = 125;
 
         ctx.beginPath();
-        ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+        ctx.arc(centerX, centerY, radius, CLEAR, 2 * Math.PI, false);
         ctx.fillStyle = 'white';
         ctx.fill();
         ctx.lineWidth = 10;
@@ -201,7 +199,7 @@ function startLevelTwo() {
         var centerY2 = canvas.height / 2;
         var ctx2 = canvas.getContext("2d");
         ctx2.beginPath();
-        ctx2.arc(centerX2, centerY2, radius2, 0, 2 * Math.PI, false);
+        ctx2.arc(centerX2, centerY2, radius2, CLEAR, 2 * Math.PI, false);
         ctx2.fillStyle = "#FA6B05";
         ctx2.fill();
         ctx2.lineWidth = 0;
@@ -238,7 +236,7 @@ function startLevelTwo() {
             var centerY2 = canvas.height / 2;
             var ctx4 = canvas.getContext("2d");
             ctx4.beginPath();
-            ctx4.arc(centerX2, centerY2, radius2, 0, 2 * Math.PI, false);
+            ctx4.arc(centerX2, centerY2, radius2, CLEAR, 2 * Math.PI, false);
             ctx4.fillStyle = '#FA6B05';
             ctx4.fill();
             ctx4.lineWidth = 0;
@@ -257,7 +255,7 @@ function startLevelTwo() {
 
 }
 
-function startLevelThree() {
+function startLevelThree() { // Square with a thick border width and slow growth.
 
 
     var canvas = document.getElementById('game');
@@ -274,11 +272,11 @@ function startLevelThree() {
         }
         if (clicks == 3) {
             if (win == true) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.clearRect(CLEAR, CLEAR, canvas.width, canvas.height);
                 ctx.beginPath();
                 startLevelFour();
             } else {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.clearRect(CLEAR, CLEAR, canvas.width, canvas.height);
                 ctx.beginPath();
 
                 startLevelThree();
@@ -289,7 +287,7 @@ function startLevelThree() {
     });
 
 
-    $(document).ready(function() {
+    $(document).ready(function() { // Creates a black square and a smaller orange one inside it.
         var canvas = document.getElementById('game');
         var ctx = canvas.getContext("2d");
         var bigSquareWidth = bigSquareHeight = 225;
@@ -314,7 +312,7 @@ function startLevelThree() {
     })
 
 
-    function grow() {
+    function grow() { // Grows the orange square, if the player lands the square within the black border, they win. If not, they lose. Also stops if the square grows outside of the border.
         if (clicks == 2) {
             if (sideLength >= 220 && sideLength <= 235) {
                 var winMessage = canvas.getContext("2d");
@@ -353,7 +351,7 @@ function startLevelThree() {
     }
 }
 
-function startLevelFour() {
+function startLevelFour() { // Increased difficulty from level 3. A square with a thinner black border and a faster growing orange square.
     var canvas = document.getElementById('game');
     var clicks = 0;
     var win = false;
@@ -368,11 +366,11 @@ function startLevelFour() {
         }
         if (clicks == 3) {
             if (win == true) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.clearRect(CLEAR, CLEAR, canvas.width, canvas.height);
                 ctx.beginPath();
                 startLevelFive();
             } else {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.clearRect(CLEAR, CLEAR, canvas.width, canvas.height);
                 ctx.beginPath();
                 startLevelFour();
 
@@ -445,7 +443,7 @@ function startLevelFour() {
     }
 }
 
-function startLevelFive() {
+function startLevelFive() { // A triangle level with a slow growth.
 
     var canvas = document.getElementById('game');
     var clicks = 0;
@@ -477,11 +475,11 @@ function startLevelFive() {
         }
         if (clicks == 3) {
             if (win == true) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.clearRect(CLEAR, CLEAR, canvas.width, canvas.height);
                 ctx.beginPath();
                 startLevelSix();
             } else {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.clearRect(CLEAR, CLEAR, canvas.width, canvas.height);
                 ctx.beginPath();
 
                 startLevelFive();
@@ -491,7 +489,7 @@ function startLevelFive() {
 
     });
 
-    $(document).ready(function() {
+    $(document).ready(function() { // Creates a black triangular shaped border and a smaller orange triangle inside of it. Also states the level name.
         var canvas = document.getElementById('game');
         if (canvas.getContext) {
             var ctx = canvas.getContext('2d');
@@ -528,7 +526,7 @@ function startLevelFive() {
     })
 
 
-    function grow() {
+    function grow() { // Grows the orange triangle and stops once the player clicks again. If the triangle fits inside the border, the player wins. If not, they lose. Also stops if the triangle passes the size of the border.
         if (clicks == 2) {
             if (y3 <= (canvas.height / 3.5) + 12.5 && y3 >= canvas.height / 3.5) {
                 var winMessage = canvas.getContext("2d");
@@ -579,7 +577,7 @@ function startLevelFive() {
     }
 }
 
-function startLevelSix() {
+function startLevelSix() { // Triangle level with a faster growing triangle.
     var canvas = document.getElementById('game');
     var clicks = 0;
     var win = false;
@@ -610,11 +608,11 @@ function startLevelSix() {
         }
         if (clicks == 3) {
             if (win == true) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.clearRect(CLEAR, CLEAR, canvas.width, canvas.height);
                 ctx.beginPath();
                 startLevelSeven();
             } else {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.clearRect(CLEAR, CLEAR, canvas.width, canvas.height);
                 ctx.beginPath();
 
                 startLevelSix();
@@ -712,7 +710,7 @@ function startLevelSix() {
     }
 }
 
-function startLevelSeven() {
+function startLevelSeven() { // Circle level with a thin border and extremely fast growing orange circle.
     var radius2 = 0;
     var canvas = document.getElementById('game');
     var clicks = 0;
@@ -725,11 +723,11 @@ function startLevelSeven() {
         }
         if (clicks == 3) {
             if (win == true) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.clearRect(CLEAR, CLEAR, canvas.width, canvas.height);
                 ctx.beginPath();
                 startLevelEight();
             } else {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.clearRect(CLEAR, CLEAR, canvas.width, canvas.height);
                 ctx.beginPath();
 
                 startLevelSeven();
@@ -748,7 +746,7 @@ function startLevelSeven() {
         var radius = 125;
 
         ctx.beginPath();
-        ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+        ctx.arc(centerX, centerY, radius, CLEAR, 2 * Math.PI, false);
         ctx.fillStyle = 'white';
         ctx.fill();
         ctx.lineWidth = 5;
@@ -760,7 +758,7 @@ function startLevelSeven() {
         var centerY2 = canvas.height / 2;
         var ctx2 = canvas.getContext("2d");
         ctx2.beginPath();
-        ctx2.arc(centerX2, centerY2, radius2, 0, 2 * Math.PI, false);
+        ctx2.arc(centerX2, centerY2, radius2, CLEAR, 2 * Math.PI, false);
         ctx2.fillStyle = "#FA6B05";
         ctx2.fill();
         ctx2.lineWidth = 0;
@@ -799,7 +797,7 @@ function startLevelSeven() {
             var centerY2 = canvas.height / 2;
             var ctx2 = canvas.getContext("2d");
             ctx2.beginPath();
-            ctx2.arc(centerX2, centerY2, radius2, 0, 2 * Math.PI, false);
+            ctx2.arc(centerX2, centerY2, radius2, CLEAR, 2 * Math.PI, false);
             ctx2.fillStyle = '#FA6B05';
             ctx2.fill();
             ctx2.lineWidth = 0;
@@ -817,7 +815,7 @@ function startLevelSeven() {
 
 }
 
-function startLevelEight() {
+function startLevelEight() { // Square level with a thin border and extremely fast growing square.
     var canvas = document.getElementById('game');
     var clicks = 0;
     var win = false;
@@ -832,11 +830,11 @@ function startLevelEight() {
         }
         if (clicks == 3) {
             if (win == true) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.clearRect(CLEAR, CLEAR, canvas.width, canvas.height);
                 ctx.beginPath();
                 startLevelNine();
             } else {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.clearRect(CLEAR, CLEAR, canvas.width, canvas.height);
                 ctx.beginPath();
 
                 startLevelEight();
@@ -912,7 +910,7 @@ function startLevelEight() {
     }
 }
 
-function startLevelNine() {
+function startLevelNine() { // Triangle level with an extremely fast growing triangle.
     var canvas = document.getElementById('game');
     var clicks = 0;
     var win = false;
@@ -943,11 +941,11 @@ function startLevelNine() {
         }
         if (clicks == 3) {
             if (win == true) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.clearRect(CLEAR, CLEAR, canvas.width, canvas.height);
                 ctx.beginPath();
                 endGame();
             } else {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.clearRect(CLEAR, CLEAR, canvas.width, canvas.height);
                 ctx.beginPath();
 
                 startLevelNine();
@@ -1045,7 +1043,7 @@ function startLevelNine() {
     }
 }
 
-function endGame() {
+function endGame() { // The last level. If the player beats the game, the title on the menu is replaced with a YOU WIN!. The player is allowed to play again. Going to the credits and going back to the main menu shows the title again.
     $('#menu').show();
 
     ctx.fillStyle = '#FA6B05'
